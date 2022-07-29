@@ -13,7 +13,7 @@ Submitters:
     - Guy Madmon 318465671
     - Ido Shimshi 314800582
 
-Git Link: 
+Git Link: https://github.com/SweetPotat0/GraphicsProject
 
 Keys:
     Escape - Close program

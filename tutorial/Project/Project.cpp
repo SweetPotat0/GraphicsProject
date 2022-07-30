@@ -227,7 +227,7 @@ void Project::Update(const Eigen::Matrix4f &Proj, const Eigen::Matrix4f &View, c
     s->SetUniformMat4f("Proj", Proj);
     s->SetUniformMat4f("View", View);
     s->SetUniformMat4f("Model", Model);
-    if (!sceneObjects[shaderIndx]->getLayer()->getIsVisible())
+    if (!sceneObjects[shapeIndx]->getLayer()->getIsVisible())
     {
         s->SetUniform2f("transparency", 0, 0);
     }

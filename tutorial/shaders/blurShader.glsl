@@ -5,6 +5,7 @@ in vec3 normal0;
 in vec3 color0;
 in vec3 position0;
 in float shapeIndx;
+uniform vec2 transparency;
 in float sigma;
 in vec2 texResolution;
 in float r;//Radius of blur
@@ -51,6 +52,6 @@ void main()
     if(col.x < minCol && col.y < minCol && col.z < minCol){
         col = texture2D(sampler1,texCoord0);
     }
-    Color=col;
+    Color=col * vec4(1,1,1, transparency.x);
 }
 

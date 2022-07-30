@@ -45,6 +45,8 @@ public:
     float calcDistanceFromCam(SceneObject *shp);
     float farCoeff = 20;
     void TextureModeChange();
+    std::vector<int> selectedTempChilds;
+    
 
 private:
     Renderer *renderer = nullptr;

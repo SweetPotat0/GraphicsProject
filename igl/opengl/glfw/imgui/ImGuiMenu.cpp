@@ -286,16 +286,18 @@ namespace igl
                     if (ImGui::CollapsingHeader("Picked Objects", ImGuiTreeNodeFlags_DefaultOpen))
                     {
                         // Material
-                        std::string tempStr = "material" + (std::to_string(viewer->data()->material_indx));
+                        //std::string tempStr = "material" + (std::to_string(viewer->data()->material_indx));
+                        std::string tempStr = (viewer->texNames[viewer->data()->material_indx]);
                         const char *current_material_item = tempStr.c_str();
                         if (ImGui::BeginCombo("##materials combo", current_material_item))
                         {
                             for (size_t n = 0; n < viewer->materials.size(); n++)
                             {
-                                bool is_selected = strcmp(current_material_item, ("material" + (std::to_string(n))).c_str()) == 0;
-                                if (ImGui::Selectable(("material" + (std::to_string(n))).c_str(), is_selected))
+                                //bool is_selected = strcmp(current_material_item, ("material" + (std::to_string(n))).c_str()) == 0;
+                                bool is_selected = strcmp(current_material_item, ((std::to_string(n))).c_str()) == 0;
+                                if (ImGui::Selectable((viewer->texNames[n]).c_str(), is_selected))
                                 {
-                                    current_material_item = ("material" + (std::to_string(n))).c_str();
+                                    current_material_item = (viewer->texNames[n]).c_str();
                                     viewer->data()->material_indx = n;
                                     GuiHandler::OnSelectMaterial(n, scn);
                                 }
@@ -365,16 +367,17 @@ namespace igl
 
                         if (ImGui::Button("Choose childs"))
                         {
-                            viewer->data()->selectedTempChilds.clear();
+                            scn->selectedTempChilds.clear();
                             for (int i : scn->pShapes)
                             {
-                                viewer->data()->selectedTempChilds.push_back(i);
+                                scn->selectedTempChilds.push_back(i);
                             }
+
                         }
 
                         if (ImGui::Button("Set parent"))
                         {
-                            GuiHandler::onSetChilds(viewer->data()->selectedTempChilds, scn);
+                            GuiHandler::onSetChilds(scn->selectedTempChilds, scn);
                         }
 
                         // selectedTempChilds

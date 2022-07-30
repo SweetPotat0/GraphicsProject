@@ -296,7 +296,7 @@ public:
 
     bool isBlur = false;
 
-    std::vector<int> selectedTempChilds;
+    
 
     std::vector<bool> selectedShapesTransparent;
 

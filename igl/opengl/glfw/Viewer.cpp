@@ -754,7 +754,6 @@ namespace igl
             {
                 // not correct when the shape is scaled
                 Eigen::Matrix4d MVP = PV * MakeTransd();
-                std::cout << "picked shapes  ";
                 bool isFound = false;
                 for (int i = 1; i < data_list.size(); i++)
                 { // add to pShapes if the center in range
@@ -767,12 +766,10 @@ namespace igl
                     {
                         pShapes.push_back(i);
                         data_list[i]->AddViewport(newViewportIndx);
-                        std::cout << i << ", ";
                         selected_data_index = i;
                         isFound = true;
                     }
                 }
-                std::cout << std::endl;
                 if (isFound)
                 {
                     Eigen::Vector4d tmp = MVP * GetPriviousTrans(Eigen::Matrix4d::Identity(), selected_data_index) * data()->MakeTransd() * Eigen::Vector4d(0, 0, 1, 1);
@@ -784,6 +781,7 @@ namespace igl
 
             int Viewer::AddTexture(const std::string &textureFileName, int dim)
             {
+                texNames.push_back(textureFileName.substr(textureFileName.find("/") + 1, textureFileName.size() - 5 - textureFileName.find("/")));
                 textures.push_back(new Texture(textureFileName, dim));
                 return (textures.size() - 1);
             }

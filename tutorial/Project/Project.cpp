@@ -83,8 +83,8 @@ void Project::Init(int DISPLAY_WIDTH, int DISPLAY_HEIGHT)
     this->DISPLAY_HEIGHT = DISPLAY_HEIGHT;
     layers.push_back(defaultLayer);
     globalTime = 0;
-    unsigned int texIDs[4] = {0, 1, 2, 3};
-    unsigned int slots[4] = {0, 1, 2, 3};
+    unsigned int texIDs[6] = {0, 1, 2, 3, 4, 5};
+    unsigned int slots[6] = {0, 1, 2, 3, 4, 5};
     int pickingShaderIndx = AddShader("shaders/pickingShader");
     int cubemapShaderIndx = AddShader("shaders/cubemapShader");
     basicShaderIndx = AddShader("shaders/basicShader");
@@ -94,15 +94,20 @@ void Project::Init(int DISPLAY_WIDTH, int DISPLAY_HEIGHT)
     unsigned int dayLightBoxTexIndx = AddTexture("textures/cubemaps/Daylight Box_", 3);
     unsigned int boxTexIndx = AddTexture("textures/box0.bmp", 2);
     unsigned int planeTexIndx = AddTexture("textures/plane.png", 2);
+    unsigned int snakeTexIndx = AddTexture("textures/snake.jpg", 2);
+    unsigned int brickTexIndx = AddTexture("textures/bricks.jpg", 2);
 
     int grass2DMatIndx = AddMaterial(&grassTexIndx, slots, 1);
     int dayLight3DMatIndx = AddMaterial(&dayLightBoxTexIndx, slots + 1, 1);
-
     int box2DMatIndx = AddMaterial(&boxTexIndx, slots + 2, 1);
     int plane2DMatIndx = AddMaterial(&planeTexIndx, slots + 3, 1);
+    int snake2DMatIndx = AddMaterial(&snakeTexIndx, slots + 4, 1);
+    int brick2DMatIndx = AddMaterial(&brickTexIndx, slots + 5, 1);
 
     std::vector<Eigen::Vector3f> points = {Eigen::Vector3f(0, 0, 0),
-                                           Eigen::Vector3f(0, 10, 0)};
+                                           Eigen::Vector3f(0, 10, 0),
+                                            Eigen::Vector3f(-5, 10, 0),
+                                            Eigen::Vector3f(-5, 0, 0) };
 
     // Cube map -->
     cubeMapIndx = AddShapeObject("cubeMap", Cube, this, -2);
@@ -130,7 +135,7 @@ void Project::Init(int DISPLAY_WIDTH, int DISPLAY_HEIGHT)
     index = AddShapeObject("test", Octahedron, this, -1);
     SetShapeShader(index, basicShaderIndx);
     SetShapeMaterial(index, box2DMatIndx);
-    sceneObjects[index]->addBiz(BezMovment(points, 0, 500), &max_time);
+    sceneObjects[index]->addBiz(BezMovment(points, 0, 300), &max_time);
     sceneObjects[index]->move(1, y);
     sceneObjects[index]->move(3, x);
 
@@ -142,7 +147,7 @@ void Project::Init(int DISPLAY_WIDTH, int DISPLAY_HEIGHT)
 
     index = AddShapeObject("test 2", Cube, this, -3);
     SetShapeShader(index, basicShaderIndx);
-    SetShapeMaterial(index, box2DMatIndx);
+    SetShapeMaterial(index, brick2DMatIndx);
 
     sceneObjects[selected_data_index]->move(-1, y);
 }

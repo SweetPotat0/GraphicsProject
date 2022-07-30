@@ -197,6 +197,7 @@ public:
 
     static void onSetChilds(std::vector<int> childs, Project *scn)
     {
+        
         if (scn->pShapes.size() != 1)
         {
             std::cout << "error, cant set childs to more than one parent" << std::endl;
@@ -205,12 +206,14 @@ public:
         SceneObject *parent = scn->sceneObjects[scn->pShapes[0]];
         for (int i : childs)
         {
+            
             SceneObject *child = scn->sceneObjects[i];
             if (child->getParent() != nullptr)
             {
                 child->getParent()->removeChild(child);
             }
             child->setParent(parent);
+            std::cout << parent->getName() << " is now " << child->getName() << "s parent" << std::endl;
         }
     }
 };

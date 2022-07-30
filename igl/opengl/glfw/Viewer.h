@@ -162,6 +162,7 @@ public:
 	bool isActive;
     bool animating = false;
     unsigned int staticScene;
+    std::vector<std::string> texNames;
 
     Shader* overlay_shader;
     Shader* overlay_point_shader;

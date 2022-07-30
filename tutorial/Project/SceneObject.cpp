@@ -103,9 +103,9 @@ void SceneObject::removeParent()
 
 void SceneObject::setParent(SceneObject* newParent) {
     if (parent != nullptr)
-    {
         parent->removeChild(this);
-    }
+    if (newParent == this)
+        newParent = nullptr;
     parent = newParent;
     currentPosition = currentPosition - (newParent == nullptr ? Eigen::Vector3f(0,0,0) : newParent->getCurrentPosition());
     if (parent != nullptr)
